@@ -44,7 +44,7 @@ def read_file_to_list(file_name):
     return contact_list
 
 
-def search_parameters():  # Поиск
+def search_parameters():  # Выбор параметра для поиска
     print('По какому полю выполнить поиск?')
     search_field = int(input('1 - по фамилии\n2 - по имени\n3 - по номеру телефона\n'))
     print()
@@ -61,7 +61,7 @@ def search_parameters():  # Поиск
     return search_field, search_value
 
 
-def find_number(contact_list):
+def find_number(contact_list): # Поиск по выбранным параметрам
     search_field, search_value = search_parameters()
     search_value_dict = {'1': 'Фамилия', '2': 'Имя', '3': 'Номер телефона'}
     found_contacts = []
@@ -75,27 +75,27 @@ def find_number(contact_list):
     print()
 
 
-def get_new_number():
+def get_new_number(): # Запись нового контакта
     last_name = input('Введите фамилию: ')
     first_name = input('Введите имя: ')
     phone_number = input('Введите номер телефона: ')
     return last_name, first_name, phone_number
 
 
-def add_phone_number(file_name):
+def add_phone_number(file_name): # Сохранение нового конакта
     info = ' '.join(get_new_number())
     with open(file_name, 'a', encoding='utf-8') as filef:
         filef.write(f'{info}\n')
 
 
-def show_phonebook(file_name):
+def show_phonebook(file_name): # Показать все контакты
     list_of_contacts = sorted(read_file_to_dict(file_name), key=lambda x: x['Фамилия'])
     print_contacts(list_of_contacts)
     print()
     return list_of_contacts
 
 
-def search_to_modify(contact_list: list):  # Поиск Для изменения файла
+def search_to_modify(contact_list: list):  # Поиск и выбор контакта для изменения
     search_field, search_value = search_parameters()
     search_result = []
     for contact in contact_list:
